@@ -1,0 +1,59 @@
+# Board
+###
+GET localhost:8000/board
+Content-Type: application/json
+
+###
+GET localhost:8000/board/6
+Content-Type: application/json
+
+###
+POST localhost:8000/board
+Content-Type: application/json
+
+{
+  "name": "new board 2"
+}
+
+###
+PUT localhost:8000/board/2
+Content-Type: application/json
+
+{
+  "name": "updated board"
+}
+
+###
+DELETE localhost:8000/board/7
+Content-Type: application/json
+
+# Task
+###
+GET localhost:8000/task
+Content-Type: application/json
+
+###
+GET localhost:8000/task/1
+Content-Type: application/json
+
+###
+POST localhost:8000/task
+Content-Type: application/json
+
+{
+  "subject": "make sandwich",
+  "board_id": 3
+}
+
+###
+PUT localhost:8000/task/5
+Content-Type: application/json
+
+{
+  "subject": "make sandwich",
+  "board_id": 2
+}
+
+###
+DELETE localhost:8000/task/1
+Content-Type: application/json
