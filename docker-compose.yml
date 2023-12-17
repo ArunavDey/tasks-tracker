@@ -1,0 +1,31 @@
+version: '3' 
+services: 
+ ui: 
+  build: 
+    context: ./ui 
+  ports: 
+    - "3000:3000" 
+  depends_on: 
+    - backend 
+ 
+ backend: 
+  build: 
+    context: ./backend 
+  environment: 
+    DATABASE_URL: postgresql+psycopg2://postgres:postgres@postgres:5432/tasks_tracker 
+  ports: 
+    - "8000:8000" 
+  depends_on: 
+    - postgres 
+ 
+ postgres: 
+  image: postgres:13 
+  environment: 
+    POSTGRES_USER: postgres 
+    POSTGRES_PASSWORD: postgres 
+    POSTGRES_DB: tasks_tracker 
+  volumes: 
+    - postgres_data:/var/lib/postgresql/data 
+ 
+volumes: 
+ postgres_data:
