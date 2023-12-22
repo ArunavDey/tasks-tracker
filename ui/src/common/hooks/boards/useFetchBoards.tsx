@@ -9,6 +9,7 @@ interface Board {
 const useFetchBoards = () => {
   const [boards, setBoards] = useState<Board[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<unknown>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -18,7 +19,8 @@ const useFetchBoards = () => {
           setBoards(resp.data.board);
         }
       } catch (error) {
-        console.error("Error fetching data:", error);
+        console.log("Error while fetching boards: ", error);
+        setError(error);
       } finally {
         setLoading(false);
       }
@@ -27,7 +29,7 @@ const useFetchBoards = () => {
     fetchData();
   }, []);
 
-  return { boards, loading };
+  return { boards, loading, error };
 };
 
 export default useFetchBoards;

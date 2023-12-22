@@ -10,6 +10,7 @@ interface Task {
 const useFetchTasks = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<unknown>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -19,7 +20,8 @@ const useFetchTasks = () => {
           setTasks(resp.data.tasks);
         }
       } catch (error) {
-        console.error("Error fetching data:", error);
+        console.log("Error while fetching tasks: ", error);
+        setError(error);
       } finally {
         setLoading(false);
       }
@@ -28,7 +30,7 @@ const useFetchTasks = () => {
     fetchData();
   }, []);
 
-  return { tasks, loading };
+  return { tasks, loading, error };
 };
 
 export default useFetchTasks;
