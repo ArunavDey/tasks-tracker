@@ -41,8 +41,8 @@ POST localhost:8000/task
 Content-Type: application/json
 
 {
-  "subject": "make sandwich",
-  "board_id": 3
+  "subject": "make chocolate",
+  "board_id": 2
 }
 
 ###

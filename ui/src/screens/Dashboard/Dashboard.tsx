@@ -1,23 +1,35 @@
 import React from "react";
-import useFetchBoards from "../../common/hooks/boards/useFetchBoards";
+// import ReactDOM from "react-dom/client";
+import { BrowserRouter, Routes, Route, useParams } from "react-router-dom";
+import { SideBar } from "../../common/components";
+import { useFetchBoards } from "../../common/hooks/boards";
+import { IEntry } from "../../common/components/SideBar/SideBar.const";
+import Board from "./Board";
 
 const Dashboard = () => {
   const { boards, loading, error } = useFetchBoards();
 
-  const displayBoards = () => {
-    if (loading || error) return [];
-    const components = boards.map((board) => {
-      const boardClass = `board-${board?.id}`;
-      return (
-        <div className={boardClass}>
-          {board.name}
-        </div>
-      )
+  const getSideBarEntries = (): IEntry[] => {
+    const entries = boards.map((board) => {
+      return {
+        id: board.id.toString(),
+        label: board.name,
+      };
     });
-    return components;
+    return entries;
   };
 
-  return <div>{displayBoards()}</div>;
+  return (
+    <div>
+      <BrowserRouter>
+        <SideBar entries={getSideBarEntries()} />
+        <Routes>
+          <Route path="/board" element={<div>No board selected</div>} />
+          <Route path="/board/:id" element={<Board />} />
+        </Routes>
+      </BrowserRouter>
+    </div>
+  );
 };
 
 export default Dashboard;
