@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-interface Task {
+interface ITask {
   id: number;
   subject: string;
   board_id: number;
 }
 
 const useFetchTasks = () => {
-  const [tasks, setTasks] = useState<Task[]>([]);
+  const [tasks, setTasks] = useState<ITask[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<unknown>(null);
 
@@ -34,3 +34,4 @@ const useFetchTasks = () => {
 };
 
 export default useFetchTasks;
+export type { ITask };

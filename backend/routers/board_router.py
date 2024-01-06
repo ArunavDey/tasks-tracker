@@ -24,6 +24,7 @@ with Session() as session:
         session.commit()
         return {"board": board.as_dict()}
 
+    # TODO: add tasks details to this call as well
     @router.get("/board/{id}", tags=["Board"])
     async def get_board(id: int):
         try:
